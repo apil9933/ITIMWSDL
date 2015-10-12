@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://model.ws.itim.ibm.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://model.ws.itim.ibm.com" xmlns:intf="http://model.ws.itim.ibm.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.3
+Built on Oct 05, 2005 (05:23:37 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://model.ws.itim.ibm.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="isItimAdmin">
+    <complexType/>
+   </element>
+   <element name="isItimAdminResponse">
+    <complexType>
+     <sequence>
+      <element name="isItimAdminReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setItimAdmin">
+    <complexType>
+     <sequence>
+      <element name="itimAdmin" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setItimAdminResponse">
+    <complexType/>
+   </element>
+   <element name="isSelect">
+    <complexType/>
+   </element>
+   <element name="isSelectResponse">
+    <complexType>
+     <sequence>
+      <element name="isSelectReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setSelect">
+    <complexType>
+     <sequence>
+      <element name="select" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setSelectResponse">
+    <complexType/>
+   </element>
+   <element name="getName">
+    <complexType/>
+   </element>
+   <element name="getNameResponse">
+    <complexType>
+     <sequence>
+      <element name="getNameReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setName">
+    <complexType>
+     <sequence>
+      <element name="name" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setNameResponse">
+    <complexType/>
+   </element>
+   <element name="getItimDN">
+    <complexType/>
+   </element>
+   <element name="getItimDNResponse">
+    <complexType>
+     <sequence>
+      <element name="getItimDNReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setItimDN">
+    <complexType>
+     <sequence>
+      <element name="itimDN" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setItimDNResponse">
+    <complexType/>
+   </element>
+   <element name="getAttributes">
+    <complexType/>
+   </element>
+   <element name="getAttributesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAttributesReturn" type="impl:WSAttribute"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_string">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="WSAttribute">
+    <sequence>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="values" nillable="true" type="impl:ArrayOf_xsd_string"/>
+    </sequence>
+   </complexType>
+   <element name="setAttributes">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="attributes" type="impl:WSAttribute"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setAttributesResponse">
+    <complexType/>
+   </element>
+   <element name="addAttribute">
+    <complexType>
+     <sequence>
+      <element name="attr" type="impl:WSAttribute"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addAttributeResponse">
+    <complexType/>
+   </element>
+   <element name="toString">
+    <complexType/>
+   </element>
+   <element name="toStringResponse">
+    <complexType>
+     <sequence>
+      <element name="toStringReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="toStringRequest">
+
+      <wsdl:part element="impl:toString" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAttributesRequest">
+
+      <wsdl:part element="impl:getAttributes" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNameResponse">
+
+      <wsdl:part element="impl:getNameResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setNameRequest">
+
+      <wsdl:part element="impl:setName" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getItimDNRequest">
+
+      <wsdl:part element="impl:getItimDN" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="isSelectResponse">
+
+      <wsdl:part element="impl:isSelectResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="isSelectRequest">
+
+      <wsdl:part element="impl:isSelect" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAttributesResponse">
+
+      <wsdl:part element="impl:getAttributesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNameRequest">
+
+      <wsdl:part element="impl:getName" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setNameResponse">
+
+      <wsdl:part element="impl:setNameResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="toStringResponse">
+
+      <wsdl:part element="impl:toStringResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setItimAdminRequest">
+
+      <wsdl:part element="impl:setItimAdmin" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setSelectRequest">
+
+      <wsdl:part element="impl:setSelect" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getItimDNResponse">
+
+      <wsdl:part element="impl:getItimDNResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="isItimAdminResponse">
+
+      <wsdl:part element="impl:isItimAdminResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setAttributesRequest">
+
+      <wsdl:part element="impl:setAttributes" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addAttributeRequest">
+
+      <wsdl:part element="impl:addAttribute" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setItimDNRequest">
+
+      <wsdl:part element="impl:setItimDN" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setAttributesResponse">
+
+      <wsdl:part element="impl:setAttributesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="isItimAdminRequest">
+
+      <wsdl:part element="impl:isItimAdmin" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setItimAdminResponse">
+
+      <wsdl:part element="impl:setItimAdminResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setSelectResponse">
+
+      <wsdl:part element="impl:setSelectResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addAttributeResponse">
+
+      <wsdl:part element="impl:addAttributeResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setItimDNResponse">
+
+      <wsdl:part element="impl:setItimDNResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WSSystemUser">
+
+      <wsdl:operation name="isItimAdmin">
+
+         <wsdl:input message="impl:isItimAdminRequest" name="isItimAdminRequest"/>
+
+         <wsdl:output message="impl:isItimAdminResponse" name="isItimAdminResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setItimAdmin">
+
+         <wsdl:input message="impl:setItimAdminRequest" name="setItimAdminRequest"/>
+
+         <wsdl:output message="impl:setItimAdminResponse" name="setItimAdminResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isSelect">
+
+         <wsdl:input message="impl:isSelectRequest" name="isSelectRequest"/>
+
+         <wsdl:output message="impl:isSelectResponse" name="isSelectResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setSelect">
+
+         <wsdl:input message="impl:setSelectRequest" name="setSelectRequest"/>
+
+         <wsdl:output message="impl:setSelectResponse" name="setSelectResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getName">
+
+         <wsdl:input message="impl:getNameRequest" name="getNameRequest"/>
+
+         <wsdl:output message="impl:getNameResponse" name="getNameResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setName">
+
+         <wsdl:input message="impl:setNameRequest" name="setNameRequest"/>
+
+         <wsdl:output message="impl:setNameResponse" name="setNameResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getItimDN">
+
+         <wsdl:input message="impl:getItimDNRequest" name="getItimDNRequest"/>
+
+         <wsdl:output message="impl:getItimDNResponse" name="getItimDNResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setItimDN">
+
+         <wsdl:input message="impl:setItimDNRequest" name="setItimDNRequest"/>
+
+         <wsdl:output message="impl:setItimDNResponse" name="setItimDNResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAttributes">
+
+         <wsdl:input message="impl:getAttributesRequest" name="getAttributesRequest"/>
+
+         <wsdl:output message="impl:getAttributesResponse" name="getAttributesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setAttributes">
+
+         <wsdl:input message="impl:setAttributesRequest" name="setAttributesRequest"/>
+
+         <wsdl:output message="impl:setAttributesResponse" name="setAttributesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addAttribute">
+
+         <wsdl:input message="impl:addAttributeRequest" name="addAttributeRequest"/>
+
+         <wsdl:output message="impl:addAttributeResponse" name="addAttributeResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="toString">
+
+         <wsdl:input message="impl:toStringRequest" name="toStringRequest"/>
+
+         <wsdl:output message="impl:toStringResponse" name="toStringResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WSSystemUserSoapBinding" type="impl:WSSystemUser">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="isItimAdmin">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="isItimAdminRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isItimAdminResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setItimAdmin">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setItimAdminRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setItimAdminResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isSelect">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="isSelectRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isSelectResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setSelect">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setSelectRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setSelectResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getName">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getNameRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getNameResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setName">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setNameRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setNameResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getItimDN">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getItimDNRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getItimDNResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setItimDN">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setItimDNRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setItimDNResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAttributes">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAttributesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAttributesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setAttributes">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setAttributesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setAttributesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addAttribute">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addAttributeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addAttributeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="toString">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="toStringRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="toStringResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WSSystemUserService">
+
+      <wsdl:port binding="impl:WSSystemUserSoapBinding" name="WSSystemUser">
+
+         <wsdlsoap:address location="http://appro-dev1.sysco.com:9081/ITIMWebServices/services/WSSystemUser"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

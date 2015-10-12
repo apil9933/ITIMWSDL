@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://services.ws.itim.ibm.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://services.ws.itim.ibm.com" xmlns:intf="http://services.ws.itim.ibm.com" xmlns:tns1="http://model.ws.itim.ibm.com" xmlns:tns2="http://exceptions.ws.itim.ibm.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.3
+Built on Oct 05, 2005 (05:23:37 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://services.ws.itim.ibm.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model.ws.itim.ibm.com"/>
+   <import namespace="http://exceptions.ws.itim.ibm.com"/>
+   <element name="assembleForm">
+    <complexType>
+     <sequence>
+      <element name="session" type="tns1:WSSession"/>
+      <element name="profile" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="assembleFormResponse">
+    <complexType>
+     <sequence>
+      <element name="assembleFormReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="fault" type="tns2:WSApplicationException"/>
+   <element name="fault1" type="tns2:WSLoginServiceException"/>
+   <element name="dereference">
+    <complexType>
+     <sequence>
+      <element name="session" type="tns1:WSSession"/>
+      <element name="elementName" type="xsd:string"/>
+      <element name="category" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="multiValues" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="dereferenceResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="dereferenceReturn" type="tns1:WSSelectItem"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getFormTemplate">
+    <complexType>
+     <sequence>
+      <element name="session" type="tns1:WSSession"/>
+      <element name="profile" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getFormTemplateResponse">
+    <complexType>
+     <sequence>
+      <element name="getFormTemplateReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="fault2" type="tns2:WSInvalidSessionException"/>
+   <element name="getWSForm">
+    <complexType>
+     <sequence>
+      <element name="session" type="tns1:WSSession"/>
+      <element name="formTemplate" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="wsAttributes" type="tns1:WSAttribute"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_string">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="getWSFormResponse">
+    <complexType>
+     <sequence>
+      <element name="getWSFormReturn" type="tns1:WSForm"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_tns1_WSConstraint">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:WSConstraint"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns1_WSSelectItem">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:WSSelectItem"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns1_WSFormElement">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:WSFormElement"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns1_WSFormTab">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:WSFormTab"/>
+    </sequence>
+   </complexType>
+   <element name="getWSFormByProfile">
+    <complexType>
+     <sequence>
+      <element name="session" type="tns1:WSSession"/>
+      <element name="profile" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="wsAttributes" type="tns1:WSAttribute"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getWSFormByProfileResponse">
+    <complexType>
+     <sequence>
+      <element name="getWSFormByProfileReturn" type="tns1:WSForm"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getWSFormByService">
+    <complexType>
+     <sequence>
+      <element name="session" type="tns1:WSSession"/>
+      <element name="serviceDN" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="wsAttributes" type="tns1:WSAttribute"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getWSFormByServiceResponse">
+    <complexType>
+     <sequence>
+      <element name="getWSFormByServiceReturn" type="tns1:WSForm"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getWSFormForProfile">
+    <complexType>
+     <sequence>
+      <element name="session" type="tns1:WSSession"/>
+      <element name="profile" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="wsAttributes" type="tns1:WSAttribute"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getWSFormForProfileResponse">
+    <complexType>
+     <sequence>
+      <element name="getWSFormForProfileReturn" type="tns1:WSForm"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getWSFormForService">
+    <complexType>
+     <sequence>
+      <element name="session" type="tns1:WSSession"/>
+      <element name="serviceDN" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="wsAttributes" type="tns1:WSAttribute"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getWSFormForServiceResponse">
+    <complexType>
+     <sequence>
+      <element name="getWSFormForServiceReturn" type="tns1:WSForm"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://model.ws.itim.ibm.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://services.ws.itim.ibm.com"/>
+   <import namespace="http://exceptions.ws.itim.ibm.com"/>
+   <complexType name="WSSession">
+    <sequence>
+     <element name="clientSession" nillable="true" type="xsd:string"/>
+     <element name="enforceChallengeResponse" type="xsd:boolean"/>
+     <element name="sessionID" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <complexType name="WSSelectItem">
+    <sequence>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="label" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="WSAttribute">
+    <sequence>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="values" nillable="true" type="impl:ArrayOf_xsd_string"/>
+    </sequence>
+   </complexType>
+   <complexType name="WSConstraint">
+    <sequence>
+     <element name="parameter" nillable="true" type="xsd:string"/>
+     <element name="type" type="xsd:int"/>
+     <element name="typeString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="WSDateInput">
+    <sequence>
+     <element name="date" nillable="true" type="xsd:dateTime"/>
+     <element name="expandedMaxYear" type="xsd:int"/>
+     <element name="expandedMinYear" type="xsd:int"/>
+     <element name="maxRangeYear" type="xsd:int"/>
+     <element name="minRangeYear" type="xsd:int"/>
+     <element name="spanMinYearRange" type="xsd:boolean"/>
+     <element name="timeRequired" type="xsd:boolean"/>
+    </sequence>
+   </complexType>
+   <complexType name="WSFormElement">
+    <sequence>
+     <element name="attrLabel" nillable="true" type="xsd:string"/>
+     <element name="attrName" nillable="true" type="xsd:string"/>
+     <element name="attrValue" nillable="true" type="xsd:string"/>
+     <element name="attrValues" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="checked" type="xsd:boolean"/>
+     <element name="constraints" nillable="true" type="impl:ArrayOf_tns1_WSConstraint"/>
+     <element name="dirty" type="xsd:boolean"/>
+     <element name="elementType" type="xsd:int"/>
+     <element name="fieldSize" nillable="true" type="xsd:string"/>
+     <element name="hiddenOnModify" type="xsd:boolean"/>
+     <element name="multiValued" type="xsd:boolean"/>
+     <element name="objectclass" nillable="true" type="xsd:string"/>
+     <element name="paginateResults" type="xsd:boolean"/>
+     <element name="queryUINeeded" type="xsd:boolean"/>
+     <element name="readOnly" type="xsd:boolean"/>
+     <element name="readOnlyOnModify" type="xsd:boolean"/>
+     <element name="referenceDN" nillable="true" type="xsd:string"/>
+     <element name="required" type="xsd:boolean"/>
+     <element name="searchBase" nillable="true" type="xsd:string"/>
+     <element name="searchCategory" nillable="true" type="xsd:string"/>
+     <element name="searchFilter" nillable="true" type="xsd:string"/>
+     <element name="searchReturnedAttr" nillable="true" type="xsd:string"/>
+     <element name="searchSubTree" type="xsd:boolean"/>
+     <element name="selectItemsList" nillable="true" type="impl:ArrayOf_tns1_WSSelectItem"/>
+     <element name="selectListboxSize" type="xsd:int"/>
+     <element name="typeString" nillable="true" type="xsd:string"/>
+     <element name="wsDateInput" nillable="true" type="tns1:WSDateInput"/>
+    </sequence>
+   </complexType>
+   <complexType name="WSFormTab">
+    <sequence>
+     <element name="formElements" nillable="true" type="impl:ArrayOf_tns1_WSFormElement"/>
+     <element name="tabName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="WSForm">
+    <sequence>
+     <element name="WSFormTabs" nillable="true" type="impl:ArrayOf_tns1_WSFormTab"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://exceptions.ws.itim.ibm.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://services.ws.itim.ibm.com"/>
+   <import namespace="http://model.ws.itim.ibm.com"/>
+   <complexType name="WSApplicationException">
+    <sequence/>
+   </complexType>
+   <complexType name="WSLoginServiceException">
+    <sequence/>
+   </complexType>
+   <complexType name="WSInvalidSessionException">
+    <complexContent>
+     <extension base="tns2:WSLoginServiceException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getWSFormByProfileResponse">
+
+      <wsdl:part element="impl:getWSFormByProfileResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getWSFormForProfileRequest">
+
+      <wsdl:part element="impl:getWSFormForProfile" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="assembleFormRequest">
+
+      <wsdl:part element="impl:assembleForm" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getWSFormRequest">
+
+      <wsdl:part element="impl:getWSForm" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="WSApplicationException">
+
+      <wsdl:part element="impl:fault" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getFormTemplateRequest">
+
+      <wsdl:part element="impl:getFormTemplate" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="WSInvalidSessionException">
+
+      <wsdl:part element="impl:fault2" name="fault2"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getFormTemplateResponse">
+
+      <wsdl:part element="impl:getFormTemplateResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getWSFormForProfileResponse">
+
+      <wsdl:part element="impl:getWSFormForProfileResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="assembleFormResponse">
+
+      <wsdl:part element="impl:assembleFormResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getWSFormResponse">
+
+      <wsdl:part element="impl:getWSFormResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getWSFormByProfileRequest">
+
+      <wsdl:part element="impl:getWSFormByProfile" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getWSFormForServiceRequest">
+
+      <wsdl:part element="impl:getWSFormForService" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getWSFormByServiceResponse">
+
+      <wsdl:part element="impl:getWSFormByServiceResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="dereferenceResponse">
+
+      <wsdl:part element="impl:dereferenceResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="dereferenceRequest">
+
+      <wsdl:part element="impl:dereference" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getWSFormByServiceRequest">
+
+      <wsdl:part element="impl:getWSFormByService" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="WSLoginServiceException">
+
+      <wsdl:part element="impl:fault1" name="fault1"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getWSFormForServiceResponse">
+
+      <wsdl:part element="impl:getWSFormForServiceResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WSFormService">
+
+      <wsdl:operation name="assembleForm">
+
+         <wsdl:input message="impl:assembleFormRequest" name="assembleFormRequest"/>
+
+         <wsdl:output message="impl:assembleFormResponse" name="assembleFormResponse"/>
+
+         <wsdl:fault message="impl:WSLoginServiceException" name="WSLoginServiceException"/>
+
+         <wsdl:fault message="impl:WSApplicationException" name="WSApplicationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="dereference">
+
+         <wsdl:input message="impl:dereferenceRequest" name="dereferenceRequest"/>
+
+         <wsdl:output message="impl:dereferenceResponse" name="dereferenceResponse"/>
+
+         <wsdl:fault message="impl:WSLoginServiceException" name="WSLoginServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getFormTemplate">
+
+         <wsdl:input message="impl:getFormTemplateRequest" name="getFormTemplateRequest"/>
+
+         <wsdl:output message="impl:getFormTemplateResponse" name="getFormTemplateResponse"/>
+
+         <wsdl:fault message="impl:WSInvalidSessionException" name="WSInvalidSessionException"/>
+
+         <wsdl:fault message="impl:WSApplicationException" name="WSApplicationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getWSForm">
+
+         <wsdl:input message="impl:getWSFormRequest" name="getWSFormRequest"/>
+
+         <wsdl:output message="impl:getWSFormResponse" name="getWSFormResponse"/>
+
+         <wsdl:fault message="impl:WSLoginServiceException" name="WSLoginServiceException"/>
+
+         <wsdl:fault message="impl:WSApplicationException" name="WSApplicationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getWSFormByProfile">
+
+         <wsdl:input message="impl:getWSFormByProfileRequest" name="getWSFormByProfileRequest"/>
+
+         <wsdl:output message="impl:getWSFormByProfileResponse" name="getWSFormByProfileResponse"/>
+
+         <wsdl:fault message="impl:WSLoginServiceException" name="WSLoginServiceException"/>
+
+         <wsdl:fault message="impl:WSApplicationException" name="WSApplicationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getWSFormByService">
+
+         <wsdl:input message="impl:getWSFormByServiceRequest" name="getWSFormByServiceRequest"/>
+
+         <wsdl:output message="impl:getWSFormByServiceResponse" name="getWSFormByServiceResponse"/>
+
+         <wsdl:fault message="impl:WSLoginServiceException" name="WSLoginServiceException"/>
+
+         <wsdl:fault message="impl:WSApplicationException" name="WSApplicationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getWSFormForProfile">
+
+         <wsdl:input message="impl:getWSFormForProfileRequest" name="getWSFormForProfileRequest"/>
+
+         <wsdl:output message="impl:getWSFormForProfileResponse" name="getWSFormForProfileResponse"/>
+
+         <wsdl:fault message="impl:WSLoginServiceException" name="WSLoginServiceException"/>
+
+         <wsdl:fault message="impl:WSApplicationException" name="WSApplicationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getWSFormForService">
+
+         <wsdl:input message="impl:getWSFormForServiceRequest" name="getWSFormForServiceRequest"/>
+
+         <wsdl:output message="impl:getWSFormForServiceResponse" name="getWSFormForServiceResponse"/>
+
+         <wsdl:fault message="impl:WSLoginServiceException" name="WSLoginServiceException"/>
+
+         <wsdl:fault message="impl:WSApplicationException" name="WSApplicationException"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WSFormServiceSoapBinding" type="impl:WSFormService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="assembleForm">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="assembleFormRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="assembleFormResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="WSLoginServiceException">
+
+            <wsdlsoap:fault name="WSLoginServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="WSApplicationException">
+
+            <wsdlsoap:fault name="WSApplicationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="dereference">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="dereferenceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="dereferenceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="WSLoginServiceException">
+
+            <wsdlsoap:fault name="WSLoginServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getFormTemplate">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getFormTemplateRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getFormTemplateResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="WSInvalidSessionException">
+
+            <wsdlsoap:fault name="WSInvalidSessionException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="WSApplicationException">
+
+            <wsdlsoap:fault name="WSApplicationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getWSForm">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getWSFormRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getWSFormResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="WSLoginServiceException">
+
+            <wsdlsoap:fault name="WSLoginServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="WSApplicationException">
+
+            <wsdlsoap:fault name="WSApplicationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getWSFormByProfile">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getWSFormByProfileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getWSFormByProfileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="WSLoginServiceException">
+
+            <wsdlsoap:fault name="WSLoginServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="WSApplicationException">
+
+            <wsdlsoap:fault name="WSApplicationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getWSFormByService">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getWSFormByServiceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getWSFormByServiceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="WSLoginServiceException">
+
+            <wsdlsoap:fault name="WSLoginServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="WSApplicationException">
+
+            <wsdlsoap:fault name="WSApplicationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getWSFormForProfile">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getWSFormForProfileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getWSFormForProfileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="WSLoginServiceException">
+
+            <wsdlsoap:fault name="WSLoginServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="WSApplicationException">
+
+            <wsdlsoap:fault name="WSApplicationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getWSFormForService">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getWSFormForServiceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getWSFormForServiceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="WSLoginServiceException">
+
+            <wsdlsoap:fault name="WSLoginServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="WSApplicationException">
+
+            <wsdlsoap:fault name="WSApplicationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WSFormServiceService">
+
+      <wsdl:port binding="impl:WSFormServiceSoapBinding" name="WSFormService">
+
+         <wsdlsoap:address location="http://appro-dev1.sysco.com:9081/ITIMWebServices/services/WSFormService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

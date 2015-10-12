@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://services.ws.itim.ibm.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://services.ws.itim.ibm.com" xmlns:intf="http://services.ws.itim.ibm.com" xmlns:tns1="http://model.ws.itim.ibm.com" xmlns:tns2="http://exceptions.ws.itim.ibm.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.3
+Built on Oct 05, 2005 (05:23:37 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://services.ws.itim.ibm.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model.ws.itim.ibm.com"/>
+   <import namespace="http://exceptions.ws.itim.ibm.com"/>
+   <element name="lookupRole">
+    <complexType>
+     <sequence>
+      <element name="session" type="tns1:WSSession"/>
+      <element name="roleDN" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupRoleResponse">
+    <complexType>
+     <sequence>
+      <element name="lookupRoleReturn" type="tns1:WSRole"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_string">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns1_WSAttribute">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:WSAttribute"/>
+    </sequence>
+   </complexType>
+   <element name="fault1" type="tns2:WSApplicationException"/>
+   <element name="fault" type="tns2:WSLoginServiceException"/>
+   <element name="lookupSystemRole">
+    <complexType>
+     <sequence>
+      <element name="session" type="tns1:WSSession"/>
+      <element name="roleDN" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupSystemRoleResponse">
+    <complexType>
+     <sequence>
+      <element name="lookupSystemRoleReturn" type="tns1:WSRole"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchRoles">
+    <complexType>
+     <sequence>
+      <element name="session" type="tns1:WSSession"/>
+      <element name="filter" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchRolesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="searchRolesReturn" type="tns1:WSRole"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://model.ws.itim.ibm.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://services.ws.itim.ibm.com"/>
+   <import namespace="http://exceptions.ws.itim.ibm.com"/>
+   <complexType name="WSSession">
+    <sequence>
+     <element name="clientSession" nillable="true" type="xsd:string"/>
+     <element name="enforceChallengeResponse" type="xsd:boolean"/>
+     <element name="sessionID" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <complexType name="WSAttribute">
+    <sequence>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="values" nillable="true" type="impl:ArrayOf_xsd_string"/>
+    </sequence>
+   </complexType>
+   <complexType name="WSObject">
+    <sequence>
+     <element name="attributes" nillable="true" type="impl:ArrayOf_tns1_WSAttribute"/>
+     <element name="itimDN" nillable="true" type="xsd:string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="select" type="xsd:boolean"/>
+    </sequence>
+   </complexType>
+   <complexType name="WSRole">
+    <complexContent>
+     <extension base="tns1:WSObject">
+      <sequence>
+       <element name="description" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://exceptions.ws.itim.ibm.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://services.ws.itim.ibm.com"/>
+   <import namespace="http://model.ws.itim.ibm.com"/>
+   <complexType name="WSApplicationException">
+    <sequence/>
+   </complexType>
+   <complexType name="WSLoginServiceException">
+    <sequence/>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="lookupRoleRequest">
+
+      <wsdl:part element="impl:lookupRole" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchRolesRequest">
+
+      <wsdl:part element="impl:searchRoles" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="WSApplicationException">
+
+      <wsdl:part element="impl:fault1" name="fault1"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchRolesResponse">
+
+      <wsdl:part element="impl:searchRolesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="WSLoginServiceException">
+
+      <wsdl:part element="impl:fault" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupSystemRoleResponse">
+
+      <wsdl:part element="impl:lookupSystemRoleResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupSystemRoleRequest">
+
+      <wsdl:part element="impl:lookupSystemRole" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupRoleResponse">
+
+      <wsdl:part element="impl:lookupRoleResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WSRoleService">
+
+      <wsdl:operation name="lookupRole">
+
+         <wsdl:input message="impl:lookupRoleRequest" name="lookupRoleRequest"/>
+
+         <wsdl:output message="impl:lookupRoleResponse" name="lookupRoleResponse"/>
+
+         <wsdl:fault message="impl:WSLoginServiceException" name="WSLoginServiceException"/>
+
+         <wsdl:fault message="impl:WSApplicationException" name="WSApplicationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupSystemRole">
+
+         <wsdl:input message="impl:lookupSystemRoleRequest" name="lookupSystemRoleRequest"/>
+
+         <wsdl:output message="impl:lookupSystemRoleResponse" name="lookupSystemRoleResponse"/>
+
+         <wsdl:fault message="impl:WSLoginServiceException" name="WSLoginServiceException"/>
+
+         <wsdl:fault message="impl:WSApplicationException" name="WSApplicationException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchRoles">
+
+         <wsdl:input message="impl:searchRolesRequest" name="searchRolesRequest"/>
+
+         <wsdl:output message="impl:searchRolesResponse" name="searchRolesResponse"/>
+
+         <wsdl:fault message="impl:WSLoginServiceException" name="WSLoginServiceException"/>
+
+         <wsdl:fault message="impl:WSApplicationException" name="WSApplicationException"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WSRoleServiceSoapBinding" type="impl:WSRoleService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="lookupRole">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupRoleRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupRoleResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="WSLoginServiceException">
+
+            <wsdlsoap:fault name="WSLoginServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="WSApplicationException">
+
+            <wsdlsoap:fault name="WSApplicationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupSystemRole">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupSystemRoleRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupSystemRoleResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="WSLoginServiceException">
+
+            <wsdlsoap:fault name="WSLoginServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="WSApplicationException">
+
+            <wsdlsoap:fault name="WSApplicationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchRoles">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchRolesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchRolesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="WSLoginServiceException">
+
+            <wsdlsoap:fault name="WSLoginServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="WSApplicationException">
+
+            <wsdlsoap:fault name="WSApplicationException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WSRoleServiceService">
+
+      <wsdl:port binding="impl:WSRoleServiceSoapBinding" name="WSRoleService">
+
+         <wsdlsoap:address location="http://appro-dev1.sysco.com:9081/ITIMWebServices/services/WSRoleService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
