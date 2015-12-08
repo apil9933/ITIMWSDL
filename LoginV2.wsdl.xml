@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="LoginV2" targetNamespace="http://ws.benefitpoint.com/aptusconnect/login/v2"
+	xmlns:tns="http://ws.benefitpoint.com/aptusconnect/login/v2" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://ws.benefitpoint.com/aptusconnect/login/v2"
+			xmlns:cmn1="http://ws.benefitpoint.com/common/v1">
+			<xsd:element name="loginResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="tns:LoginResult" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="login">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="username" type="xsd:string" />
+						<xsd:element name="password" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="LoginResult">
+				<xsd:sequence>
+					<xsd:element name="success" type="xsd:boolean" />
+					<xsd:element name="sessionID" type="xsd:string" maxOccurs="1" minOccurs="0" />
+					<xsd:element name="error" type="tns:LoginError" maxOccurs="1" minOccurs="0" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:simpleType name="LoginError">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="Success" />
+					<xsd:enumeration value="Invalid_Login" />
+					<xsd:enumeration value="Account_Locked_Out" />
+				</xsd:restriction>
+			</xsd:simpleType>
+
+			<xsd:element name="logoutResponse" type="cmn1:VoidType" />
+			<xsd:element name="logout">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="sessionID" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="echoResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="sessionID" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="echo">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="sessionID" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="loginWithKey">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="key" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="loginWithKeyResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="tns:LoginResult"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getCurrentUser">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="sessionID" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getCurrentUserResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="currentUser" type="cmn1:CurrentUser"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="loginResponse">
+		<wsdl:part name="parameters" element="tns:loginResponse" />
+	</wsdl:message>
+	<wsdl:message name="loginRequest">
+		<wsdl:part name="parameters" element="tns:login" />
+	</wsdl:message>
+	<wsdl:message name="logoutResponse">
+		<wsdl:part name="parameters" element="tns:logoutResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="logoutRequest">
+		<wsdl:part name="parameters" element="tns:logout" />
+	</wsdl:message>
+	<wsdl:message name="echoResponse">
+		<wsdl:part name="parameters" element="tns:echoResponse" />
+	</wsdl:message>
+	<wsdl:message name="echoRequest">
+		<wsdl:part name="parameters" element="tns:echo" />
+	</wsdl:message>
+	<wsdl:message name="loginWithKeyRequest">
+		<wsdl:part name="parameters" element="tns:loginWithKey"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="loginWithKeyResponse">
+		<wsdl:part name="parameters" element="tns:loginWithKeyResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCurrentUserRequest">
+		<wsdl:part name="parameters" element="tns:getCurrentUser"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCurrentUserResponse">
+		<wsdl:part name="parameters" element="tns:getCurrentUserResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="LoginV2">
+		<wsdl:operation name="login">
+			<wsdl:input message="tns:loginRequest" />
+			<wsdl:output message="tns:loginResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="logout">
+			<wsdl:input message="tns:logoutRequest" />
+			<wsdl:output message="tns:logoutResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="echo">
+			<wsdl:input message="tns:echoRequest" />
+			<wsdl:output message="tns:echoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="loginWithKey">
+			<wsdl:input message="tns:loginWithKeyRequest"></wsdl:input>
+			<wsdl:output message="tns:loginWithKeyResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCurrentUser">
+			<wsdl:input message="tns:getCurrentUserRequest"></wsdl:input>
+			<wsdl:output message="tns:getCurrentUserResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="LoginV2SOAP" type="tns:LoginV2">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="login">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/login/v2/login" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="logout">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/login/v2/logout" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="echo">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/login/v2/echo" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="loginWithKey">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/login/v2/loginWithKey" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCurrentUser">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/login/v2/getCurrentUser" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="LoginV2">
+		<wsdl:port name="LoginV2SOAP" binding="tns:LoginV2SOAP">
+			<soap:address location="https://www1.benefitpoint.com/aptusConnect/services/LoginV2SOAP" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

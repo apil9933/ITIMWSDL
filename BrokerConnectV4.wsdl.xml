@@ -1,0 +1,3650 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="BrokerConnectV4"
+	targetNamespace="http://ws.benefitpoint.com/aptusconnect/broker/v4"
+	xmlns:tns="http://ws.benefitpoint.com/aptusconnect/broker/v4"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://ws.benefitpoint.com/aptusconnect/broker/v4"
+			xmlns:cmn1="http://ws.benefitpoint.com/common/v3">
+			<xsd:element name="SessionIdHeader" type="cmn1:SessionIdHeader" />
+			<xsd:element name="findChangesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="changes"
+							type="cmn1:ChangeSummary" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findChanges">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria"
+							type="cmn1:ChangeSearchCriteria" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findAccountsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result"
+							type="cmn1:AccountSummary" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findAccounts">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria"
+							type="cmn1:AccountSearchCriteria" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+            <xsd:element name="findAttachmentsResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="result" type="cmn1:Attachment" maxOccurs="unbounded" minOccurs="0" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="findAttachments">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="criteria" type="cmn1:AttachmentSearchCriteria" />
+                        <xsd:element name="firstResult" type="xsd:int" maxOccurs="1" minOccurs="0" />
+                        <xsd:element name="maxResults" type="xsd:int" maxOccurs="1" minOccurs="0" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getAttachmentResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="result" type="cmn1:Attachment" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getAttachment">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="attachmentId" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+			<xsd:element name="getAccountResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="account" type="cmn1:Account" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getAccount">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="accountID" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createAccountResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createAccount">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="account" type="cmn1:Account"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateAccountResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateAccount">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="update" type="cmn1:Account" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getTeamMembersResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="teamMembers"
+							type="cmn1:AccountTeamMember" maxOccurs="unbounded"
+							minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getTeamMembers">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="accountID" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateTeamMembersResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"
+							maxOccurs="1" minOccurs="1" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateTeamMembers">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="teamUpdates"
+							type="cmn1:UpdateAccountTeamMembers" maxOccurs="1"
+							minOccurs="1" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="removeTeamMembersResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"
+							maxOccurs="1" minOccurs="1" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="removeTeamMembers">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="removals"
+							type="cmn1:RemoveAccountTeamMembers" maxOccurs="1"
+							minOccurs="1" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getAvailableCarriersResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="carriers"
+							type="cmn1:CarrierSummary" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getAvailableCarriers"
+				type="cmn1:VoidType" />
+			<xsd:element name="findAccountContactsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="contacts"
+							type="cmn1:AccountContact" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findAccountContacts">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria"
+							type="cmn1:AccountContactSearchCriteria" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getAccountContactResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="contact"
+							type="cmn1:AccountContact" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getAccountContact">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="contactID" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createAccountContactResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createAccountContact">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="contact"
+							type="cmn1:AccountContact"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateAccountContactResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateAccountContact">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="update"
+							type="cmn1:AccountContact"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="deleteAccountContactsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="deleteAccountContacts">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="deletes"
+							type="cmn1:DeleteAccountContacts" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		    <xsd:element name="lookupLocationsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="locations"
+							type="cmn1:SimpleLookup" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="lookupLocations">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="accountID" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findCarrierContacts">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria" type="cmn1:CarrierContactSearchCriteria"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findCarrierContactsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="contacts" type="cmn1:CarrierContact" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getCarrierContact">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="contactID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getCarrierContactResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="contact"
+							type="cmn1:CarrierContact">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createCarrierContact">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="contact" type="cmn1:CarrierContact"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createCarrierContactResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateCarrierContact">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="contact" type="cmn1:CarrierContact"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateCarrierContactResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="deleteCarrierContacts">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="deletes" type="cmn1:DeleteCarrierContacts"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="deleteCarrierContactsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findActivityLogRecordsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="summaries"
+							type="cmn1:ActivityLogRecordSummary" maxOccurs="unbounded"
+							minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findActivityLogRecords">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria"
+							type="cmn1:ActivityLogSearchCriteria" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getActivityLogRecordResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="record"
+							type="cmn1:ActivityLogRecord" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getActivityLogRecord">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="recordID" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="lookupInquirerTypesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="inquirerTypes"
+							type="cmn1:SimpleLookup" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="lookupInquirerTypes"
+				type="cmn1:VoidType" />
+			<xsd:element name="lookupSalesOpportunityStagesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="stages"
+							type="cmn1:SimpleLookup" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="lookupSalesOpportunityStages"
+				type="cmn1:VoidType" />
+			<xsd:element name="getActivityLogSubjectsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="subjects"
+							type="cmn1:ActivityLogSubject" maxOccurs="unbounded"
+							minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getActivityLogSubjects"
+				type="cmn1:VoidType" />
+			<xsd:element name="getActivityLogTemplatesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="templates" type="cmn1:ActivityLogTemplate" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getActivityLogTemplates"
+				type="cmn1:VoidType" />
+			<xsd:element name="createActivityLogRecordResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createActivityLogRecord">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="record"
+							type="cmn1:ActivityLogRecord"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateActivityLogRecordResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateActivityLogRecord">
+		    <xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="update"
+							type="cmn1:ActivityLogRecord"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+	        <xsd:element name="createActivityLogRecordfromTemplate">
+				<xsd:complexType>
+					<xsd:sequence>
+                        <xsd:element name="accountID" type="xsd:int">
+						</xsd:element>
+                        <xsd:element name="templateID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createActivityLogRecordfromTemplateResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findProductsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="summaries"
+							type="cmn1:ProductSummary" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findProducts">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria"
+							type="cmn1:ProductSearchCriteria" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getProductResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Product" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getProduct">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="productID" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createProduct">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="product"
+							type="cmn1:Product">
+						</xsd:element>
+						<xsd:element name="planConfigurationOptions"
+							type="cmn1:PlanConfigurationOptions" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createProductResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateProduct">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="update" type="cmn1:Product"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateProductResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+	        <xsd:element name="getProductHistory">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="productID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getProductHistoryResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="productHistory" type="cmn1:ProductHistory"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="lookupPolicyOriginationReasonQualifiers" type="cmn1:VoidType" />
+			<xsd:element name="lookupPolicyOriginationReasonQualifiersResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="policyOriginationReasonQualifiers"
+							type="cmn1:SimpleLookup" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getProductTypesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="productTypes"
+							type="cmn1:ProductType" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getProductTypes" type="cmn1:VoidType" />
+			<xsd:element name="findBenefitSummariesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="summaries"
+							type="cmn1:BenefitSummaryDescription" maxOccurs="unbounded"
+							minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findBenefitSummaries">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria"
+							type="cmn1:BenefitSummarySearchCriteria" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getBenefitSummaryResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="benefitSummary"
+							type="cmn1:BenefitSummary" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getBenefitSummary">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="benefitSummaryID"
+							type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createBenefitSummary">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="benefitSummary" type="cmn1:BenefitSummary"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createBenefitSummaryResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateBenefitSummary">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="benefitSummary" type="cmn1:BenefitSummary"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateBenefitSummaryResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getAttributeValuesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="attributeValues"
+							type="cmn1:AttributeValue" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getAttributeValuesRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="accountID" type="xsd:int" />
+						<xsd:element name="planID" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findUsersResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="summaries"
+							type="cmn1:UserSummary" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findUsers">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria"
+							type="cmn1:UserSearchCriteria" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+            <xsd:element name="findAccountsByAdminPrimaryContactResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="accountID" type="xsd:int" maxOccurs="unbounded" minOccurs="0" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="findAccountsByAdminPrimaryContact">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="criteria" type="cmn1:AccountAdminPrimaryContactSearchCriteria"  maxOccurs="1" minOccurs="1" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getAccountsByAdminPrimaryContactCount">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="userID" type="xsd:int" maxOccurs="1" minOccurs="1" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getAccountsByAdminPrimaryContactCountResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="count" type="xsd:int" maxOccurs="1" minOccurs="1" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+			<xsd:element name="getUserResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="user" type="cmn1:User" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getUser">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="userID" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+            <xsd:element name="inactivateUserResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="result" type="cmn1:Result" minOccurs="1" maxOccurs="1" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="inactivateUser">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="userID" type="xsd:int"  maxOccurs="1" minOccurs="1" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+			<xsd:element name="getDisciplinesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="disciplines"
+							type="cmn1:SimpleLookup" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getDisciplines" type="cmn1:VoidType" />
+			<xsd:element name="findSplitsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="splits" type="cmn1:Split"
+							maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findSplits">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria"
+							type="cmn1:SplitSearchCriteria" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getSplitResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="split" type="cmn1:Split" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getSplit">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="splitID" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findPayeesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="summaries"
+							type="cmn1:PayeeSummary" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findPayees">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria"
+							type="cmn1:PayeeSearchCriteria" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPayeeResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="payee" type="cmn1:Payee" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPayee">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="payeeID" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findStatements">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria" type="cmn1:StatementSearchCriteria"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findStatementsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="summaries" type="cmn1:StatementSummary" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getStatement">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="statementID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getStatementResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="statement" type="cmn1:Statement"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findPostingRecords">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria" type="cmn1:PostingRecordSearchCriteria"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findPostingRecordsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="postingRecords" type="cmn1:PostingRecord" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findPostingRecords2">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria" type="cmn1:PostingRecordSearchCriteria2"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findPostingRecords2Response">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="postingRecords" type="cmn1:PostingRecord2" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPostingRecordCount">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria" type="cmn1:PostingRecordSearchCriteria"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPostingRecordCountResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="count" type="xsd:int" maxOccurs="1" minOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPostingRecord">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="postingRecordID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPostingRecordResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="postingRecord" type="cmn1:PostingRecord"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updatePostingRecord">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="update" type="cmn1:UpdatePostingRecord"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updatePostingRecordResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findRequestsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="requests"
+							type="cmn1:RequestSummary" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findRequests">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria"
+							type="cmn1:RequestSearchCriteria" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getRequestResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="request" type="cmn1:Request" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="requestID" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findPlanDesignsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planDesigns"
+							type="cmn1:PlanDesignSummary" maxOccurs="unbounded"
+							minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findPlanDesigns">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria"
+							type="cmn1:PlanDesignSearchCriteria" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPlanDesignResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planDesign"
+							type="cmn1:PlanDesign" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPlanDesign">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planDesignID" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findInvitationsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="invitations"
+							type="cmn1:InvitationSummary" maxOccurs="unbounded"
+							minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findInvitations">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria"
+							type="cmn1:InvitationSearchCriteria" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getInvitationResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="invitation"
+							type="cmn1:Invitation" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getInvitation">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="invitationID" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getRate">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="rateID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getRateResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="rate" type="cmn1:Rate"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findResponses">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="criteria" type="cmn1:ResponseSearchCriteria"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findResponsesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="responses" type="cmn1:ResponseSummary" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="responseID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getResponseResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="response" type="cmn1:Response"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findRates">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="rateSearchCriteria" type="cmn1:RateSearchCriteria"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findRatesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="rates" type="cmn1:RateSummary" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findPlanDesignAlternates">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planDesignAlternateSearchCriteria" type="cmn1:PlanDesignAlternateSearchCriteria"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findPlanDesignAlternatesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planDesigns" type="cmn1:PlanDesignAlternateSummary" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPlanDesignAlternate">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planDesignAlternateID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPlanDesignAlternateResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planDesignAlternate" type="cmn1:PlanDesignAlternate"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		    <xsd:element name="getRateTypesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="rateTypes"
+							type="cmn1:RateType" maxOccurs="unbounded" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getRateTypes" type="cmn1:VoidType" />
+			<xsd:element name="getRateStructure">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="rateTypeID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getRateStructureResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="rateStructure" type="cmn1:RateStructure"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getBenefitSummaryStructure">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planTypeID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getBenefitSummaryStructureResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="benefitSummaryStructure" type="cmn1:BenefitSummaryStructure"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findOffices">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="criteria" type="cmn1:OfficeSearchCriteria"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findOfficesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="offices" type="cmn1:Office" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getOffice">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="officeID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getOfficeResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="office" type="cmn1:Office"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getCustomFieldStructure">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="customizationArea" type="cmn1:CustomizationArea"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getCustomFieldStructureResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="customFieldStructure" type="cmn1:CustomFieldStructure"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="checkAccountModuleAccess"
+				type="cmn1:VoidType">
+
+			</xsd:element>
+			<xsd:element name="checkAccountModuleAccessResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="result" type="cmn1:Result" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="checkContactModuleAccess"
+				type="cmn1:VoidType">
+
+			</xsd:element>
+			<xsd:element name="checkContactModuleAccessResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="result" type="cmn1:Result" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="checkActivityLogModuleAccess"
+				type="cmn1:VoidType">
+
+			</xsd:element>
+			<xsd:element name="checkActivityLogModuleAccessResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="result" type="cmn1:Result" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="checkProductModuleAccess"
+				type="cmn1:VoidType">
+
+			</xsd:element>
+			<xsd:element name="checkProductModuleAccessResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="result" type="cmn1:Result" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="checkRevenueTrackingModuleAccess"
+				type="cmn1:VoidType">
+
+			</xsd:element>
+			<xsd:element name="checkRevenueTrackingModuleAccessResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="result" type="cmn1:Result" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="checkUserModuleAccess"
+				type="cmn1:VoidType">
+
+			</xsd:element>
+			<xsd:element name="checkUserModuleAccessResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getAccountTeamRoles"
+				type="cmn1:VoidType">
+
+			</xsd:element>
+			<xsd:element name="getAccountTeamRolesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="roles" type="cmn1:AccountTeamRole" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getContribution">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="contributionID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getContributionResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="contribution" type="cmn1:Contribution"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getContributionStructure">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="productTypeID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getContributionStructureResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="contributionStructure" type="cmn1:ContributionStructure"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findContributions">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="contributionSearchCriteria" type="cmn1:ContributionSearchCriteria"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findContributionsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="contributions" type="cmn1:ContributionSummary" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findEligibilityRules">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="eligibilityRuleSearchCriteria" type="cmn1:EligibilityRuleSearchCriteria"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="findEligibilityRulesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="eligibilityRules" type="cmn1:EligibilityRuleSummary" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getEligibilityRule">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="eligibilityRuleID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getEligibilityRuleResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="eligibilityRule" type="cmn1:EligibilityRule"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createStatement">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="statement" type="cmn1:Statement"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createStatementResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateStatement">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="update"
+							type="cmn1:Statement">
+						</xsd:element>
+						<xsd:element name="action"
+							type="cmn1:StatementUpdateAction" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateStatementResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createPlanRelationship">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planRelationship" type="cmn1:PlanRelationship"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="createPlanRelationshipResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updatePlanRelationship">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planRelationshipId" type="xsd:int"></xsd:element>
+						<xsd:element name="description" type="xsd:string"></xsd:element>
+						<xsd:element name="groupTypeId" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updatePlanRelationshipResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="deletePlanRelationship">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planRelationshipId" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="deletePlanRelationshipResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="deleteLinkedPlans">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planRelationshipId"
+							type="xsd:int">
+						</xsd:element>
+						<xsd:element name="relatedPlanProduct"
+							type="cmn1:RelatedPlanProductInfo">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="deleteLinkedPlansResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="addLinkedPlans">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planRelationshipId"
+							type="xsd:int">
+						</xsd:element>
+						<xsd:element name="relatedPlanProduct"
+							type="cmn1:RelatedPlanProductInfo">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="addLinkedPlansResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="cmn1:Result"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPlanRelationship">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planRelationshipId" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPlanRelationshipResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planRelationship" type="cmn1:PlanRelationship"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPlanRelationships">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="planProductId" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getPlanRelationshipsResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+            <xsd:element name="planRelationship" type="cmn1:PlanRelationship" maxOccurs="unbounded" minOccurs="0" />
+          </xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="SessionHeader">
+		<wsdl:part name="SessionIdHeader" element="tns:SessionIdHeader" />
+	</wsdl:message>
+	<wsdl:message name="findChangesResponse">
+		<wsdl:part name="parameters" element="tns:findChangesResponse" />
+	</wsdl:message>
+	<wsdl:message name="findChangesRequest">
+		<wsdl:part name="parameters" element="tns:findChanges" />
+	</wsdl:message>
+	<wsdl:message name="findAccountsResponse">
+		<wsdl:part name="parameters" element="tns:findAccountsResponse" />
+	</wsdl:message>
+	<wsdl:message name="findAccountsRequest">
+		<wsdl:part name="parameters" element="tns:findAccounts" />
+	</wsdl:message>
+    <wsdl:message name="findAttachmentsResponse">
+   		<wsdl:part name="parameters" element="tns:findAttachmentsResponse" />
+   	</wsdl:message>
+   	<wsdl:message name="findAttachmentsRequest">
+   		<wsdl:part name="parameters" element="tns:findAttachments" />
+   	</wsdl:message>
+    <wsdl:message name="getAttachmentResponse">
+   		<wsdl:part name="parameters" element="tns:getAttachmentResponse" />
+   	</wsdl:message>
+   	<wsdl:message name="getAttachmentRequest">
+   		<wsdl:part name="parameters" element="tns:getAttachment" />
+   	</wsdl:message>
+	<wsdl:message name="getAccountResponse">
+		<wsdl:part name="parameters" element="tns:getAccountResponse" />
+	</wsdl:message>
+	<wsdl:message name="getAccountRequest">
+		<wsdl:part name="parameters" element="tns:getAccount" />
+	</wsdl:message>
+	<wsdl:message name="createAccountResponse">
+		<wsdl:part name="parameters"
+			element="tns:createAccountResponse" />
+	</wsdl:message>
+	<wsdl:message name="createAccountRequest">
+		<wsdl:part name="parameters" element="tns:createAccount" />
+	</wsdl:message>
+	<wsdl:message name="updateAccountResponse">
+		<wsdl:part name="parameters"
+			element="tns:updateAccountResponse" />
+	</wsdl:message>
+	<wsdl:message name="updateAccountRequest">
+		<wsdl:part name="parameters" element="tns:updateAccount" />
+	</wsdl:message>
+	<wsdl:message name="getTeamMembersResponse">
+		<wsdl:part name="parameters"
+			element="tns:getTeamMembersResponse" />
+	</wsdl:message>
+	<wsdl:message name="getTeamMembersRequest">
+		<wsdl:part name="parameters" element="tns:getTeamMembers" />
+	</wsdl:message>
+	<wsdl:message name="updateTeamMembersResponse">
+		<wsdl:part name="parameters"
+			element="tns:updateTeamMembersResponse" />
+	</wsdl:message>
+	<wsdl:message name="updateTeamMembersRequest">
+		<wsdl:part name="parameters" element="tns:updateTeamMembers" />
+	</wsdl:message>
+	<wsdl:message name="removeTeamMembersResponse">
+		<wsdl:part name="parameters"
+			element="tns:removeTeamMembersResponse" />
+	</wsdl:message>
+	<wsdl:message name="removeTeamMembersRequest">
+		<wsdl:part name="parameters" element="tns:removeTeamMembers" />
+	</wsdl:message>
+	<wsdl:message name="getAvailableCarriersResponse">
+		<wsdl:part name="parameters"
+			element="tns:getAvailableCarriersResponse" />
+	</wsdl:message>
+	<wsdl:message name="getAvailableCarriersRequest">
+		<wsdl:part name="parameters" element="tns:getAvailableCarriers" />
+	</wsdl:message>
+	<wsdl:message name="findAccountContactsResponse">
+		<wsdl:part name="parameters"
+			element="tns:findAccountContactsResponse" />
+	</wsdl:message>
+	<wsdl:message name="findAccountContactsRequest">
+		<wsdl:part name="parameters" element="tns:findAccountContacts" />
+	</wsdl:message>
+	<wsdl:message name="getAccountContactResponse">
+		<wsdl:part name="parameters"
+			element="tns:getAccountContactResponse" />
+	</wsdl:message>
+	<wsdl:message name="getAccountContactRequest">
+		<wsdl:part name="parameters" element="tns:getAccountContact" />
+	</wsdl:message>
+	<wsdl:message name="createAccountContactResponse">
+		<wsdl:part name="parameters"
+			element="tns:createAccountContactResponse" />
+	</wsdl:message>
+	<wsdl:message name="createAccountContactRequest">
+		<wsdl:part name="parameters"
+			element="tns:createAccountContact" />
+	</wsdl:message>
+	<wsdl:message name="updateAccountContactResponse">
+		<wsdl:part name="parameters"
+			element="tns:updateAccountContactResponse" />
+	</wsdl:message>
+	<wsdl:message name="updateAccountContactRequest">
+		<wsdl:part name="parameters"
+			element="tns:updateAccountContact" />
+	</wsdl:message>
+	<wsdl:message name="deleteAccountContactsResponse">
+		<wsdl:part name="parameters"
+			element="tns:deleteAccountContactsResponse" />
+	</wsdl:message>
+	<wsdl:message name="deleteAccountContactsRequest">
+		<wsdl:part name="parameters"
+			element="tns:deleteAccountContacts" />
+	</wsdl:message>
+	<wsdl:message name="lookupLocationsResponse">
+		<wsdl:part name="parameters"
+			element="tns:lookupLocationsResponse" />
+	</wsdl:message>
+	<wsdl:message name="lookupLocationsRequest">
+		<wsdl:part name="parameters" element="tns:lookupLocations" />
+	</wsdl:message>
+    <wsdl:message name="findCarrierContactsRequest">
+		<wsdl:part name="parameters" element="tns:findCarrierContacts"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findCarrierContactsResponse">
+		<wsdl:part name="parameters" element="tns:findCarrierContactsResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCarrierContactRequest">
+		<wsdl:part name="parameters" element="tns:getCarrierContact"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCarrierContactResponse">
+		<wsdl:part name="parameters" element="tns:getCarrierContactResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createCarrierContactRequest">
+		<wsdl:part name="parameters" element="tns:createCarrierContact"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createCarrierContactResponse">
+		<wsdl:part name="parameters" element="tns:createCarrierContactResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateCarrierContactRequest">
+		<wsdl:part name="parameters" element="tns:updateCarrierContact"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateCarrierContactResponse">
+		<wsdl:part name="parameters" element="tns:updateCarrierContactResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteCarrierContactsRequest">
+		<wsdl:part name="parameters" element="tns:deleteCarrierContacts"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteCarrierContactsResponse">
+		<wsdl:part name="parameters" element="tns:deleteCarrierContactsResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findActivityLogRecordsResponse">
+		<wsdl:part name="parameters"
+			element="tns:findActivityLogRecordsResponse" />
+	</wsdl:message>
+	<wsdl:message name="findActivityLogRecordsRequest">
+		<wsdl:part name="parameters"
+			element="tns:findActivityLogRecords" />
+	</wsdl:message>
+	<wsdl:message name="getActivityLogRecordResponse">
+		<wsdl:part name="parameters"
+			element="tns:getActivityLogRecordResponse" />
+	</wsdl:message>
+	<wsdl:message name="getActivityLogRecordRequest">
+		<wsdl:part name="parameters" element="tns:getActivityLogRecord" />
+	</wsdl:message>
+	<wsdl:message name="lookupInquirerTypesResponse">
+		<wsdl:part name="parameters"
+			element="tns:lookupInquirerTypesResponse" />
+	</wsdl:message>
+	<wsdl:message name="lookupInquirerTypesRequest">
+		<wsdl:part name="parameters" element="tns:lookupInquirerTypes" />
+	</wsdl:message>
+	<wsdl:message name="lookupSalesOpportunityStagesResponse">
+		<wsdl:part name="parameters"
+			element="tns:lookupSalesOpportunityStagesResponse" />
+	</wsdl:message>
+	<wsdl:message name="lookupSalesOpportunityStagesRequest">
+		<wsdl:part name="parameters"
+			element="tns:lookupSalesOpportunityStages" />
+	</wsdl:message>
+	<wsdl:message name="getActivityLogSubjectsResponse">
+		<wsdl:part name="parameters"
+			element="tns:getActivityLogSubjectsResponse" />
+	</wsdl:message>
+	<wsdl:message name="getActivityLogSubjectsRequest">
+		<wsdl:part name="parameters"
+			element="tns:getActivityLogSubjects" />
+	</wsdl:message>
+	<wsdl:message name="createActivityLogRecordResponse">
+		<wsdl:part name="parameters"
+			element="tns:createActivityLogRecordResponse" />
+	</wsdl:message>
+	<wsdl:message name="createActivityLogRecordRequest">
+		<wsdl:part name="parameters"
+			element="tns:createActivityLogRecord" />
+	</wsdl:message>
+	<wsdl:message name="updateActivityLogRecordResponse">
+		<wsdl:part name="parameters"
+			element="tns:updateActivityLogRecordResponse" />
+	</wsdl:message>
+	<wsdl:message name="updateActivityLogRecordRequest">
+		<wsdl:part name="parameters"
+			element="tns:updateActivityLogRecord" />
+	</wsdl:message>
+    <wsdl:message name="getActivityLogTemplatesRequest">
+		<wsdl:part name="parameters" element="tns:getActivityLogTemplates"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getActivityLogTemplatesResponse">
+		<wsdl:part name="parameters" element="tns:getActivityLogTemplatesResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createActivityLogRecordfromTemplateRequest">
+		<wsdl:part name="parameters" element="tns:createActivityLogRecordfromTemplate"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createActivityLogRecordfromTemplateResponse">
+		<wsdl:part name="parameters" element="tns:createActivityLogRecordfromTemplateResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findProductsResponse">
+		<wsdl:part name="parameters" element="tns:findProductsResponse" />
+	</wsdl:message>
+	<wsdl:message name="findProductsRequest">
+		<wsdl:part name="parameters" element="tns:findProducts" />
+	</wsdl:message>
+	<wsdl:message name="getProductResponse">
+		<wsdl:part name="parameters" element="tns:getProductResponse" />
+	</wsdl:message>
+	<wsdl:message name="getProductRequest">
+		<wsdl:part name="parameters" element="tns:getProduct" />
+	</wsdl:message>
+	<wsdl:message name="createProductRequest">
+		<wsdl:part name="parameters" element="tns:createProduct"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createProductResponse">
+		<wsdl:part name="parameters" element="tns:createProductResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateProductRequest">
+		<wsdl:part name="parameters" element="tns:updateProduct"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateProductResponse">
+		<wsdl:part name="parameters" element="tns:updateProductResponse"></wsdl:part>
+	</wsdl:message>
+    <wsdl:message name="getProductHistoryRequest">
+		<wsdl:part name="parameters" element="tns:getProductHistory"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getProductHistoryResponse">
+		<wsdl:part name="parameters" element="tns:getProductHistoryResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="lookupPolicyOriginationReasonQualifiersRequest">
+		<wsdl:part name="parameters" element="tns:lookupPolicyOriginationReasonQualifiers"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="lookupPolicyOriginationReasonQualifiersResponse">
+		<wsdl:part name="parameters" element="tns:lookupPolicyOriginationReasonQualifiersResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getProductTypesResponse">
+		<wsdl:part name="parameters"
+			element="tns:getProductTypesResponse" />
+	</wsdl:message>
+	<wsdl:message name="getProductTypesRequest">
+		<wsdl:part name="parameters" element="tns:getProductTypes" />
+	</wsdl:message>
+	<wsdl:message name="findBenefitSummariesResponse">
+		<wsdl:part name="parameters"
+			element="tns:findBenefitSummariesResponse" />
+	</wsdl:message>
+	<wsdl:message name="findBenefitSummariesRequest">
+		<wsdl:part name="parameters" element="tns:findBenefitSummaries" />
+    </wsdl:message>
+    <wsdl:message name="findUsersResponse">
+		<wsdl:part name="parameters" element="tns:findUsersResponse" />
+	</wsdl:message>
+	<wsdl:message name="findUsersRequest">
+		<wsdl:part name="parameters" element="tns:findUsers" />
+	</wsdl:message>
+    <wsdl:message name="findAccountsByAdminPrimaryContactResponse">
+   		<wsdl:part name="parameters" element="tns:findAccountsByAdminPrimaryContactResponse" />
+   	</wsdl:message>
+   	<wsdl:message name="findAccountsByAdminPrimaryContactRequest">
+   		<wsdl:part name="parameters" element="tns:findAccountsByAdminPrimaryContact" />
+   	</wsdl:message>
+    <wsdl:message name="getAccountsByAdminPrimaryContactCountRequest">
+   		<wsdl:part name="parameters" element="tns:getAccountsByAdminPrimaryContactCount"></wsdl:part>
+   	</wsdl:message>
+   	<wsdl:message name="getAccountsByAdminPrimaryContactCountResponse">
+   		<wsdl:part name="parameters" element="tns:getAccountsByAdminPrimaryContactCountResponse"></wsdl:part>
+   	</wsdl:message>
+	<wsdl:message name="getUserResponse">
+		<wsdl:part name="parameters" element="tns:getUserResponse" />
+	</wsdl:message>
+	<wsdl:message name="getUserRequest">
+		<wsdl:part name="parameters" element="tns:getUser" />
+	</wsdl:message>
+    <wsdl:message name="inactivateUserResponse">
+   		<wsdl:part name="parameters" element="tns:inactivateUserResponse" />
+   	</wsdl:message>
+   	<wsdl:message name="inactivateUserRequest">
+   		<wsdl:part name="parameters" element="tns:inactivateUser" />
+   	</wsdl:message>
+	<wsdl:message name="getDisciplinesResponse">
+		<wsdl:part name="parameters"
+			element="tns:getDisciplinesResponse" />
+	</wsdl:message>
+	<wsdl:message name="getDisciplinesRequest">
+		<wsdl:part name="parameters" element="tns:getDisciplines" />
+	</wsdl:message>
+	<wsdl:message name="findSplitsResponse">
+		<wsdl:part name="parameters" element="tns:findSplitsResponse" />
+	</wsdl:message>
+	<wsdl:message name="findSplitsRequest">
+		<wsdl:part name="parameters" element="tns:findSplits" />
+	</wsdl:message>
+	<wsdl:message name="getSplitResponse">
+		<wsdl:part name="parameters" element="tns:getSplitResponse" />
+	</wsdl:message>
+	<wsdl:message name="getSplitRequest">
+		<wsdl:part name="parameters" element="tns:getSplit" />
+	</wsdl:message>
+	<wsdl:message name="findPayeesResponse">
+		<wsdl:part name="parameters" element="tns:findPayeesResponse" />
+	</wsdl:message>
+	<wsdl:message name="findPayeesRequest">
+		<wsdl:part name="parameters" element="tns:findPayees" />
+	</wsdl:message>
+	<wsdl:message name="getPayeeResponse">
+		<wsdl:part name="parameters" element="tns:getPayeeResponse" />
+	</wsdl:message>
+	<wsdl:message name="getPayeeRequest">
+		<wsdl:part name="parameters" element="tns:getPayee" />
+	</wsdl:message>
+    <wsdl:message name="findStatementsRequest">
+		<wsdl:part name="parameters" element="tns:findStatements"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findStatementsResponse">
+		<wsdl:part name="parameters" element="tns:findStatementsResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getStatementRequest">
+		<wsdl:part name="parameters" element="tns:getStatement"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getStatementResponse">
+		<wsdl:part name="parameters" element="tns:getStatementResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findPostingRecordsRequest">
+		<wsdl:part name="parameters" element="tns:findPostingRecords"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findPostingRecordsResponse">
+		<wsdl:part name="parameters" element="tns:findPostingRecordsResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findPostingRecords2Request">
+		<wsdl:part name="parameters" element="tns:findPostingRecords2"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findPostingRecords2Response">
+		<wsdl:part name="parameters" element="tns:findPostingRecords2Response"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getPostingRecordCountRequest">
+		<wsdl:part name="parameters" element="tns:getPostingRecordCount"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getPostingRecordCountResponse">
+		<wsdl:part name="parameters" element="tns:getPostingRecordCountResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getPostingRecordRequest">
+		<wsdl:part name="parameters" element="tns:getPostingRecord"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getPostingRecordResponse">
+		<wsdl:part name="parameters" element="tns:getPostingRecordResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updatePostingRecordRequest">
+		<wsdl:part name="parameters" element="tns:updatePostingRecord"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updatePostingRecordResponse">
+		<wsdl:part name="parameters" element="tns:updatePostingRecordResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBenefitSummaryResponse">
+		<wsdl:part name="parameters"
+			element="tns:getBenefitSummaryResponse" />
+	</wsdl:message>
+	<wsdl:message name="getBenefitSummaryRequest">
+		<wsdl:part name="parameters" element="tns:getBenefitSummary" />
+	</wsdl:message>
+	<wsdl:message name="createBenefitSummaryRequest">
+		<wsdl:part name="parameters" element="tns:createBenefitSummary"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createBenefitSummaryResponse">
+		<wsdl:part name="parameters" element="tns:createBenefitSummaryResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateBenefitSummaryRequest">
+		<wsdl:part name="parameters" element="tns:updateBenefitSummary"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateBenefitSummaryResponse">
+		<wsdl:part name="parameters" element="tns:updateBenefitSummaryResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findRequestsResponse">
+		<wsdl:part name="parameters" element="tns:findRequestsResponse" />
+	</wsdl:message>
+	<wsdl:message name="findRequestsRequest">
+		<wsdl:part name="parameters" element="tns:findRequests" />
+	</wsdl:message>
+	<wsdl:message name="getRequestResponse">
+		<wsdl:part name="parameters" element="tns:getRequestResponse" />
+	</wsdl:message>
+	<wsdl:message name="getRequestRequest">
+		<wsdl:part name="parameters" element="tns:getRequest" />
+	</wsdl:message>
+	<wsdl:message name="findPlanDesignsResponse">
+		<wsdl:part name="parameters"
+			element="tns:findPlanDesignsResponse" />
+	</wsdl:message>
+	<wsdl:message name="findPlanDesignsRequest">
+		<wsdl:part name="parameters" element="tns:findPlanDesigns" />
+	</wsdl:message>
+	<wsdl:message name="getPlanDesignResponse">
+		<wsdl:part name="parameters"
+			element="tns:getPlanDesignResponse" />
+	</wsdl:message>
+	<wsdl:message name="getPlanDesignRequest">
+		<wsdl:part name="parameters" element="tns:getPlanDesign" />
+	</wsdl:message>
+	<wsdl:message name="findInvitationsResponse">
+		<wsdl:part name="parameters"
+			element="tns:findInvitationsResponse" />
+	</wsdl:message>
+	<wsdl:message name="findInvitationsRequest">
+		<wsdl:part name="parameters" element="tns:findInvitations" />
+	</wsdl:message>
+	<wsdl:message name="getInvitationResponse">
+		<wsdl:part name="parameters"
+			element="tns:getInvitationResponse" />
+	</wsdl:message>
+	<wsdl:message name="getInvitationRequest">
+		<wsdl:part name="parameters" element="tns:getInvitation" />
+	</wsdl:message>
+	<wsdl:message name="getRateRequest">
+		<wsdl:part name="parameters" element="tns:getRate"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getRateResponse">
+		<wsdl:part name="parameters" element="tns:getRateResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findResponsesRequest">
+		<wsdl:part name="parameters" element="tns:findResponses"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findResponsesResponse">
+		<wsdl:part name="parameters" element="tns:findResponsesResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getResponseRequest">
+		<wsdl:part name="parameters" element="tns:getResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getResponseResponse">
+		<wsdl:part name="parameters" element="tns:getResponseResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findRatesRequest">
+		<wsdl:part name="parameters" element="tns:findRates"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findRatesResponse">
+		<wsdl:part name="parameters" element="tns:findRatesResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findPlanDesignAlternatesRequest">
+		<wsdl:part name="parameters" element="tns:findPlanDesignAlternates"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findPlanDesignAlternatesResponse">
+		<wsdl:part name="parameters" element="tns:findPlanDesignAlternatesResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getPlanDesignAlternateRequest">
+		<wsdl:part name="parameters" element="tns:getPlanDesignAlternate"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getPlanDesignAlternateResponse">
+		<wsdl:part name="parameters" element="tns:getPlanDesignAlternateResponse"></wsdl:part>
+	</wsdl:message>
+    <wsdl:message name="getRateTypesResponse">
+		<wsdl:part name="parameters"
+			element="tns:getRateTypesResponse" />
+	</wsdl:message>
+	<wsdl:message name="getRateTypesRequest">
+		<wsdl:part name="parameters" element="tns:getRateTypes" />
+	</wsdl:message>
+	<wsdl:message name="getRateStructureRequest">
+		<wsdl:part name="parameters" element="tns:getRateStructure"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getRateStructureResponse">
+		<wsdl:part name="parameters" element="tns:getRateStructureResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBenefitSummaryStructureRequest">
+		<wsdl:part name="parameters" element="tns:getBenefitSummaryStructure"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBenefitSummaryStructureResponse">
+		<wsdl:part name="parameters" element="tns:getBenefitSummaryStructureResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findOfficesRequest">
+		<wsdl:part name="parameters" element="tns:findOffices"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findOfficesResponse">
+		<wsdl:part name="parameters" element="tns:findOfficesResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getOfficeRequest">
+		<wsdl:part name="parameters" element="tns:getOffice"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getOfficeResponse">
+		<wsdl:part name="parameters" element="tns:getOfficeResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCustomFieldStructureRequest">
+		<wsdl:part name="parameters" element="tns:getCustomFieldStructure"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCustomFieldStructureResponse">
+		<wsdl:part name="parameters" element="tns:getCustomFieldStructureResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkAccountModuleAccessRequest">
+		<wsdl:part name="parameters" element="tns:checkAccountModuleAccess"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkAccountModuleAccessResponse">
+		<wsdl:part name="parameters"
+			element="tns:checkAccountModuleAccessResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkContactModuleAccessRequest">
+		<wsdl:part name="parameters" element="tns:checkContactModuleAccess"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkContactModuleAccessResponse">
+		<wsdl:part name="parameters"
+			element="tns:checkContactModuleAccessResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkActivityLogModuleAccessRequest">
+		<wsdl:part name="parameters" element="tns:checkActivityLogModuleAccess"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkActivityLogModuleAccessResponse">
+		<wsdl:part name="parameters"
+			element="tns:checkActivityLogModuleAccessResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkProductModuleAccessRequest">
+		<wsdl:part name="parameters" element="tns:checkProductModuleAccess"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkProductModuleAccessResponse">
+		<wsdl:part name="parameters"
+			element="tns:checkProductModuleAccessResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkRevenueTrackingModuleAccessRequest">
+		<wsdl:part name="parameters" element="tns:checkRevenueTrackingModuleAccess"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkRevenueTrackingModuleAccessResponse">
+		<wsdl:part name="parameters"
+			element="tns:checkRevenueTrackingModuleAccessResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkUserModuleAccessRequest">
+		<wsdl:part name="parameters" element="tns:checkUserModuleAccess"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkUserModuleAccessResponse">
+		<wsdl:part name="parameters"
+			element="tns:checkUserModuleAccessResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getAccountTeamRolesRequest">
+		<wsdl:part name="parameters" element="tns:getAccountTeamRoles"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getAccountTeamRolesResponse">
+		<wsdl:part name="parameters" element="tns:getAccountTeamRolesResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getContributionRequest">
+		<wsdl:part name="parameters" element="tns:getContribution"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getContributionResponse">
+		<wsdl:part name="parameters" element="tns:getContributionResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getContributionStructureRequest">
+		<wsdl:part name="parameters" element="tns:getContributionStructure"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getContributionStructureResponse">
+		<wsdl:part name="parameters" element="tns:getContributionStructureResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findContributionsRequest">
+		<wsdl:part name="parameters" element="tns:findContributions"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findContributionsResponse">
+		<wsdl:part name="parameters" element="tns:findContributionsResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findEligibilityRulesRequest">
+		<wsdl:part name="parameters" element="tns:findEligibilityRules"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findEligibilityRulesResponse">
+		<wsdl:part name="parameters" element="tns:findEligibilityRulesResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getEligibilityRuleRequest">
+		<wsdl:part name="parameters" element="tns:getEligibilityRule"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getEligibilityRuleResponse">
+		<wsdl:part name="parameters" element="tns:getEligibilityRuleResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createStatementRequest">
+		<wsdl:part name="parameters" element="tns:createStatement"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createStatementResponse">
+		<wsdl:part name="parameters" element="tns:createStatementResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateStatementRequest">
+		<wsdl:part name="parameters" element="tns:updateStatement"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateStatementResponse">
+		<wsdl:part name="parameters" element="tns:updateStatementResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createPlanRelationshipRequest">
+		<wsdl:part name="parameters" element="tns:createPlanRelationship"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createPlanRelationshipResponse">
+		<wsdl:part name="parameters" element="tns:createPlanRelationshipResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updatePlanRelationshipRequest">
+		<wsdl:part name="parameters" element="tns:updatePlanRelationship"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updatePlanRelationshipResponse">
+		<wsdl:part name="parameters" element="tns:updatePlanRelationshipResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deletePlanRelationshipRequest">
+		<wsdl:part name="parameters" element="tns:deletePlanRelationship"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deletePlanRelationshipResponse">
+		<wsdl:part name="parameters" element="tns:deletePlanRelationshipResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteLinkedPlansRequest">
+		<wsdl:part name="parameters" element="tns:deleteLinkedPlans"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteLinkedPlansResponse">
+		<wsdl:part name="parameters" element="tns:deleteLinkedPlansResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="addLinkedPlansRequest">
+		<wsdl:part name="parameters" element="tns:addLinkedPlans"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="addLinkedPlansResponse">
+		<wsdl:part name="parameters" element="tns:addLinkedPlansResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getPlanRelationshipRequest">
+		<wsdl:part name="parameters" element="tns:getPlanRelationship"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getPlanRelationshipResponse">
+		<wsdl:part name="parameters" element="tns:getPlanRelationshipResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getPlanRelationshipsRequest">
+		<wsdl:part name="parameters" element="tns:getPlanRelationships"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getPlanRelationshipsResponse">
+		<wsdl:part name="parameters" element="tns:getPlanRelationshipsResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="BrokerConnectV4">
+		<wsdl:operation name="findChanges">
+			<wsdl:input message="tns:findChangesRequest" />
+			<wsdl:output message="tns:findChangesResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="findAccounts">
+			<wsdl:input message="tns:findAccountsRequest" />
+			<wsdl:output message="tns:findAccountsResponse" />
+		</wsdl:operation>
+        <wsdl:operation name="findAttachments">
+            <wsdl:input message="tns:findAttachmentsRequest" />
+            <wsdl:output message="tns:findAttachmentsResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="getAttachment">
+            <wsdl:input message="tns:getAttachmentRequest" />
+            <wsdl:output message="tns:getAttachmentResponse" />
+        </wsdl:operation>
+		<wsdl:operation name="getAccount">
+			<wsdl:input message="tns:getAccountRequest" />
+			<wsdl:output message="tns:getAccountResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="createAccount">
+			<wsdl:input message="tns:createAccountRequest" />
+			<wsdl:output message="tns:createAccountResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="updateAccount">
+			<wsdl:input message="tns:updateAccountRequest" />
+			<wsdl:output message="tns:updateAccountResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getTeamMembers">
+			<wsdl:input message="tns:getTeamMembersRequest" />
+			<wsdl:output message="tns:getTeamMembersResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="updateTeamMembers">
+			<wsdl:input message="tns:updateTeamMembersRequest" />
+			<wsdl:output message="tns:updateTeamMembersResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="removeTeamMembers">
+			<wsdl:input message="tns:removeTeamMembersRequest" />
+			<wsdl:output message="tns:removeTeamMembersResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getAvailableCarriers">
+			<wsdl:input message="tns:getAvailableCarriersRequest" />
+			<wsdl:output message="tns:getAvailableCarriersResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="findAccountContacts">
+			<wsdl:input message="tns:findAccountContactsRequest" />
+			<wsdl:output message="tns:findAccountContactsResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getAccountContact">
+			<wsdl:input message="tns:getAccountContactRequest" />
+			<wsdl:output message="tns:getAccountContactResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="createAccountContact">
+			<wsdl:input message="tns:createAccountContactRequest" />
+			<wsdl:output message="tns:createAccountContactResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="updateAccountContact">
+			<wsdl:input message="tns:updateAccountContactRequest" />
+			<wsdl:output message="tns:updateAccountContactResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="deleteAccountContacts">
+			<wsdl:input message="tns:deleteAccountContactsRequest" />
+			<wsdl:output message="tns:deleteAccountContactsResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="lookupLocations">
+			<wsdl:input message="tns:lookupLocationsRequest" />
+			<wsdl:output message="tns:lookupLocationsResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="findActivityLogRecords">
+			<wsdl:input message="tns:findActivityLogRecordsRequest" />
+			<wsdl:output message="tns:findActivityLogRecordsResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getActivityLogRecord">
+			<wsdl:input message="tns:getActivityLogRecordRequest" />
+			<wsdl:output message="tns:getActivityLogRecordResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="lookupInquirerTypes">
+			<wsdl:input message="tns:lookupInquirerTypesRequest" />
+			<wsdl:output message="tns:lookupInquirerTypesResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="lookupSalesOpportunityStages">
+			<wsdl:input
+				message="tns:lookupSalesOpportunityStagesRequest" />
+			<wsdl:output
+				message="tns:lookupSalesOpportunityStagesResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getActivityLogSubjects">
+			<wsdl:input message="tns:getActivityLogSubjectsRequest" />
+			<wsdl:output message="tns:getActivityLogSubjectsResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="createActivityLogRecord">
+			<wsdl:input message="tns:createActivityLogRecordRequest" />
+			<wsdl:output message="tns:createActivityLogRecordResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="updateActivityLogRecord">
+			<wsdl:input message="tns:updateActivityLogRecordRequest" />
+			<wsdl:output message="tns:updateActivityLogRecordResponse" />
+		</wsdl:operation>
+	    <wsdl:operation name="getActivityLogTemplates">
+			<wsdl:input message="tns:getActivityLogTemplatesRequest"></wsdl:input>
+			<wsdl:output message="tns:getActivityLogTemplatesResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createActivityLogRecordfromTemplate">
+			<wsdl:input message="tns:createActivityLogRecordfromTemplateRequest"></wsdl:input>
+			<wsdl:output message="tns:createActivityLogRecordfromTemplateResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findProducts">
+			<wsdl:input message="tns:findProductsRequest" />
+			<wsdl:output message="tns:findProductsResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getProduct">
+			<wsdl:input message="tns:getProductRequest" />
+			<wsdl:output message="tns:getProductResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="createProduct">
+			<wsdl:input message="tns:createProductRequest"></wsdl:input>
+			<wsdl:output message="tns:createProductResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateProduct">
+			<wsdl:input message="tns:updateProductRequest"></wsdl:input>
+			<wsdl:output message="tns:updateProductResponse"></wsdl:output>
+		</wsdl:operation>
+        <wsdl:operation name="getProductHistory">
+			<wsdl:input message="tns:getProductHistoryRequest"></wsdl:input>
+			<wsdl:output message="tns:getProductHistoryResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="lookupPolicyOriginationReasonQualifiers">
+			<wsdl:input message="tns:lookupPolicyOriginationReasonQualifiersRequest"></wsdl:input>
+			<wsdl:output message="tns:lookupPolicyOriginationReasonQualifiersResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getProductTypes">
+			<wsdl:input message="tns:getProductTypesRequest" />
+			<wsdl:output message="tns:getProductTypesResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="findBenefitSummaries">
+			<wsdl:input message="tns:findBenefitSummariesRequest" />
+			<wsdl:output message="tns:findBenefitSummariesResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getBenefitSummary">
+			<wsdl:input message="tns:getBenefitSummaryRequest" />
+			<wsdl:output message="tns:getBenefitSummaryResponse" />
+		</wsdl:operation>
+	    <wsdl:operation name="createBenefitSummary">
+			<wsdl:input message="tns:createBenefitSummaryRequest"></wsdl:input>
+			<wsdl:output message="tns:createBenefitSummaryResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateBenefitSummary">
+			<wsdl:input message="tns:updateBenefitSummaryRequest"></wsdl:input>
+			<wsdl:output message="tns:updateBenefitSummaryResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findUsers">
+			<wsdl:input message="tns:findUsersRequest" />
+			<wsdl:output message="tns:findUsersResponse" />
+		</wsdl:operation>
+        <wsdl:operation name="findAccountsByAdminPrimaryContact">
+            <wsdl:input message="tns:findAccountsByAdminPrimaryContactRequest" />
+            <wsdl:output message="tns:findAccountsByAdminPrimaryContactResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="getAccountsByAdminPrimaryContactCount">
+            <wsdl:input message="tns:getAccountsByAdminPrimaryContactCountRequest"></wsdl:input>
+            <wsdl:output message="tns:getAccountsByAdminPrimaryContactCountResponse"></wsdl:output>
+        </wsdl:operation>
+		<wsdl:operation name="getUser">
+			<wsdl:input message="tns:getUserRequest" />
+			<wsdl:output message="tns:getUserResponse" />
+		</wsdl:operation>
+        <wsdl:operation name="inactivateUser">
+            <wsdl:input message="tns:inactivateUserRequest" />
+            <wsdl:output message="tns:inactivateUserResponse" />
+        </wsdl:operation>
+		<wsdl:operation name="getDisciplines">
+			<wsdl:input message="tns:getDisciplinesRequest" />
+			<wsdl:output message="tns:getDisciplinesResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="findSplits">
+			<wsdl:input message="tns:findSplitsRequest" />
+			<wsdl:output message="tns:findSplitsResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getSplit">
+			<wsdl:input message="tns:getSplitRequest" />
+			<wsdl:output message="tns:getSplitResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="findPayees">
+			<wsdl:input message="tns:findPayeesRequest" />
+			<wsdl:output message="tns:findPayeesResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getPayee">
+			<wsdl:input message="tns:getPayeeRequest" />
+			<wsdl:output message="tns:getPayeeResponse" />
+		</wsdl:operation>
+	    <wsdl:operation name="findStatements">
+			<wsdl:input message="tns:findStatementsRequest"></wsdl:input>
+			<wsdl:output message="tns:findStatementsResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getStatement">
+			<wsdl:input message="tns:getStatementRequest"></wsdl:input>
+			<wsdl:output message="tns:getStatementResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findPostingRecords">
+			<wsdl:input message="tns:findPostingRecordsRequest"></wsdl:input>
+			<wsdl:output message="tns:findPostingRecordsResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findPostingRecords2">
+			<wsdl:input message="tns:findPostingRecords2Request"></wsdl:input>
+			<wsdl:output message="tns:findPostingRecords2Response"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPostingRecordCount">
+			<wsdl:input message="tns:getPostingRecordCountRequest"></wsdl:input>
+			<wsdl:output message="tns:getPostingRecordCountResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPostingRecord">
+			<wsdl:input message="tns:getPostingRecordRequest"></wsdl:input>
+			<wsdl:output message="tns:getPostingRecordResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updatePostingRecord">
+			<wsdl:input message="tns:updatePostingRecordRequest"></wsdl:input>
+			<wsdl:output message="tns:updatePostingRecordResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findRequests">
+			<wsdl:input message="tns:findRequestsRequest" />
+			<wsdl:output message="tns:findRequestsResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getRequest">
+			<wsdl:input message="tns:getRequestRequest" />
+			<wsdl:output message="tns:getRequestResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="findPlanDesigns">
+			<wsdl:input message="tns:findPlanDesignsRequest" />
+			<wsdl:output message="tns:findPlanDesignsResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getPlanDesign">
+			<wsdl:input message="tns:getPlanDesignRequest" />
+			<wsdl:output message="tns:getPlanDesignResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="findInvitations">
+			<wsdl:input message="tns:findInvitationsRequest" />
+			<wsdl:output message="tns:findInvitationsResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getInvitation">
+			<wsdl:input message="tns:getInvitationRequest" />
+			<wsdl:output message="tns:getInvitationResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getRate">
+			<wsdl:input message="tns:getRateRequest"></wsdl:input>
+			<wsdl:output message="tns:getRateResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findResponses">
+			<wsdl:input message="tns:findResponsesRequest"></wsdl:input>
+			<wsdl:output message="tns:findResponsesResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getResponse">
+			<wsdl:input message="tns:getResponseRequest"></wsdl:input>
+			<wsdl:output message="tns:getResponseResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findRates">
+			<wsdl:input message="tns:findRatesRequest"></wsdl:input>
+			<wsdl:output message="tns:findRatesResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findPlanDesignAlternates">
+			<wsdl:input message="tns:findPlanDesignAlternatesRequest"></wsdl:input>
+			<wsdl:output message="tns:findPlanDesignAlternatesResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPlanDesignAlternate">
+			<wsdl:input message="tns:getPlanDesignAlternateRequest"></wsdl:input>
+			<wsdl:output message="tns:getPlanDesignAlternateResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getRateTypes">
+			<wsdl:input message="tns:getRateTypesRequest" />
+			<wsdl:output message="tns:getRateTypesResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getRateStructure">
+			<wsdl:input message="tns:getRateStructureRequest"></wsdl:input>
+			<wsdl:output message="tns:getRateStructureResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBenefitSummaryStructure">
+			<wsdl:input message="tns:getBenefitSummaryStructureRequest"></wsdl:input>
+			<wsdl:output message="tns:getBenefitSummaryStructureResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findOffices">
+			<wsdl:input message="tns:findOfficesRequest"></wsdl:input>
+			<wsdl:output message="tns:findOfficesResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getOffice">
+			<wsdl:input message="tns:getOfficeRequest"></wsdl:input>
+			<wsdl:output message="tns:getOfficeResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCustomFieldStructure">
+			<wsdl:input message="tns:getCustomFieldStructureRequest"></wsdl:input>
+			<wsdl:output message="tns:getCustomFieldStructureResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkAccountModuleAccess">
+			<wsdl:input message="tns:checkAccountModuleAccessRequest"></wsdl:input>
+			<wsdl:output message="tns:checkAccountModuleAccessResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkContactModuleAccess">
+			<wsdl:input message="tns:checkContactModuleAccessRequest"></wsdl:input>
+			<wsdl:output message="tns:checkContactModuleAccessResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkActivityLogModuleAccess">
+			<wsdl:input message="tns:checkActivityLogModuleAccessRequest"></wsdl:input>
+			<wsdl:output message="tns:checkActivityLogModuleAccessResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkProductModuleAccess">
+			<wsdl:input message="tns:checkProductModuleAccessRequest"></wsdl:input>
+			<wsdl:output message="tns:checkProductModuleAccessResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkRevenueTrackingModuleAccess">
+			<wsdl:input message="tns:checkRevenueTrackingModuleAccessRequest"></wsdl:input>
+			<wsdl:output message="tns:checkRevenueTrackingModuleAccessResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkUserModuleAccess">
+			<wsdl:input message="tns:checkUserModuleAccessRequest"></wsdl:input>
+			<wsdl:output message="tns:checkUserModuleAccessResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAccountTeamRoles">
+			<wsdl:input message="tns:getAccountTeamRolesRequest"></wsdl:input>
+			<wsdl:output message="tns:getAccountTeamRolesResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findCarrierContacts">
+			<wsdl:input message="tns:findCarrierContactsRequest"></wsdl:input>
+			<wsdl:output message="tns:findCarrierContactsResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCarrierContact">
+			<wsdl:input message="tns:getCarrierContactRequest"></wsdl:input>
+			<wsdl:output message="tns:getCarrierContactResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createCarrierContact">
+			<wsdl:input message="tns:createCarrierContactRequest"></wsdl:input>
+			<wsdl:output message="tns:createCarrierContactResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateCarrierContact">
+			<wsdl:input message="tns:updateCarrierContactRequest"></wsdl:input>
+			<wsdl:output message="tns:updateCarrierContactResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteCarrierContacts">
+			<wsdl:input message="tns:deleteCarrierContactsRequest"></wsdl:input>
+			<wsdl:output message="tns:deleteCarrierContactsResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getContribution">
+			<wsdl:input message="tns:getContributionRequest"></wsdl:input>
+			<wsdl:output message="tns:getContributionResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getContributionStructure">
+			<wsdl:input message="tns:getContributionStructureRequest"></wsdl:input>
+			<wsdl:output message="tns:getContributionStructureResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findContributions">
+			<wsdl:input message="tns:findContributionsRequest"></wsdl:input>
+			<wsdl:output message="tns:findContributionsResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findEligibilityRules">
+			<wsdl:input message="tns:findEligibilityRulesRequest"></wsdl:input>
+			<wsdl:output message="tns:findEligibilityRulesResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getEligibilityRule">
+			<wsdl:input message="tns:getEligibilityRuleRequest"></wsdl:input>
+			<wsdl:output message="tns:getEligibilityRuleResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createStatement">
+			<wsdl:input message="tns:createStatementRequest"></wsdl:input>
+			<wsdl:output message="tns:createStatementResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateStatement">
+			<wsdl:input message="tns:updateStatementRequest"></wsdl:input>
+			<wsdl:output message="tns:updateStatementResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createPlanRelationship">
+			<wsdl:input message="tns:createPlanRelationshipRequest"></wsdl:input>
+			<wsdl:output message="tns:createPlanRelationshipResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updatePlanRelationship">
+			<wsdl:input message="tns:updatePlanRelationshipRequest"></wsdl:input>
+			<wsdl:output message="tns:updatePlanRelationshipResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deletePlanRelationship">
+			<wsdl:input message="tns:deletePlanRelationshipRequest"></wsdl:input>
+			<wsdl:output message="tns:deletePlanRelationshipResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteLinkedPlans">
+			<wsdl:input message="tns:deleteLinkedPlansRequest"></wsdl:input>
+			<wsdl:output message="tns:deleteLinkedPlansResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addLinkedPlans">
+			<wsdl:input message="tns:addLinkedPlansRequest"></wsdl:input>
+			<wsdl:output message="tns:addLinkedPlansResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPlanRelationship">
+			<wsdl:input message="tns:getPlanRelationshipRequest"></wsdl:input>
+			<wsdl:output message="tns:getPlanRelationshipResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPlanRelationships">
+			<wsdl:input message="tns:getPlanRelationshipsRequest"></wsdl:input>
+			<wsdl:output message="tns:getPlanRelationshipsResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="BrokerConnectV4SOAP"
+		type="tns:BrokerConnectV4">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="findChanges">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findChanges" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findAccounts">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findAccounts" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+        <wsdl:operation name="findAttachments">
+            <soap:operation
+                soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findAttachments" />
+            <wsdl:input>
+                <soap:header message="tns:SessionHeader"
+                    part="SessionIdHeader" use="literal" />
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAttachment">
+            <soap:operation
+                soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getAttachment" />
+            <wsdl:input>
+                <soap:header message="tns:SessionHeader"
+                    part="SessionIdHeader" use="literal" />
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+		<wsdl:operation name="getAccount">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getAccount" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createAccount">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/createAccount" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateAccount">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/updateAccount" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getTeamMembers">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getTeamMembers" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateTeamMembers">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/updateTeamMembers" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="removeTeamMembers">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/removeTeamMembers" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAvailableCarriers">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getAvailableCarriers" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findAccountContacts">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findAccountContacts" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAccountContact">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getAccountContact" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createAccountContact">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/createAccountContact" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader" use="literal"
+					part="SessionIdHeader" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateAccountContact">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/updateAccountContact" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteAccountContacts">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/deleteAccountContacts" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="lookupLocations">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/lookupLocations" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findActivityLogRecords">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findActivityLogRecords" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getActivityLogRecord">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getActivityLogRecord" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="lookupInquirerTypes">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/lookupInquirerTypes" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="lookupSalesOpportunityStages">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/lookupSalesOpportunityStages" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getActivityLogSubjects">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getActivityLogSubjects" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createActivityLogRecord">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/createActivityLogRecord" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateActivityLogRecord">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/updateActivityLogRecord" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getActivityLogTemplates">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getActivityLogTemplates" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createActivityLogRecordfromTemplate">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/createActivityLogRecordfromTemplate" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findProducts">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findProducts" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getProduct">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getProduct" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createProduct">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/createProduct" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateProduct">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/updateProduct" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createPlanRelationship">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/createPlanRelationship" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updatePlanRelationship">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/updatePlanRelationship" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deletePlanRelationship">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/deletePlanRelationship" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteLinkedPlans">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/deleteLinkedPlans" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addLinkedPlans">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/addLinkedPlans" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPlanRelationship">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getPlanRelationship" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPlanRelationships">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getPlanRelationships" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getProductTypes">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getProductTypes" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findBenefitSummaries">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findBenefitSummaries" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBenefitSummary">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getBenefitSummary" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createBenefitSummary">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/createBenefitSummary" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateBenefitSummary">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/updateBenefitSummary" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findUsers">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findUsers" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+        <wsdl:operation name="findAccountsByAdminPrimaryContact">
+            <soap:operation
+                soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findAccountsByAdminPrimaryContact" />
+            <wsdl:input>
+                <soap:header message="tns:SessionHeader"
+                    part="SessionIdHeader" use="literal" />
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAccountsByAdminPrimaryContactCount">
+            <soap:operation
+                soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getAccountsByAdminPrimaryContactCount" />
+            <wsdl:input>
+                <soap:header message="tns:SessionHeader"
+                    part="SessionIdHeader" use="literal" />
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+		<wsdl:operation name="getUser">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getUser" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+        <wsdl:operation name="inactivateUser">
+            <soap:operation
+                soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/inactivateUser" />
+            <wsdl:input>
+                <soap:header message="tns:SessionHeader"
+                    part="SessionIdHeader" use="literal" />
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+		<wsdl:operation name="getDisciplines">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getDisciplines" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findSplits">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findSplits" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getSplit">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getSplit" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findPayees">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findPayees" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPayee">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getPayee" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findStatements">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findStatements" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getStatement">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getStatement" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findPostingRecords">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findPostingRecords" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findPostingRecords2">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findPostingRecords2" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPostingRecordCount">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getPostingRecordCount" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPostingRecord">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getPostingRecord" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updatePostingRecord">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/updatePostingRecord" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findRequests">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findRequests" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getRequest">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getRequest" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findPlanDesigns">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findPlanDesigns" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPlanDesign">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getPlanDesign" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findInvitations">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findInvitations" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getInvitation">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getInvitation" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getRate">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getRate" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findResponses">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findResponses" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getResponse">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getResponse" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findRates">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findRates" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findPlanDesignAlternates">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findPlanDesignAlternates" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPlanDesignAlternate">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getPlanDesignAlternate" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getRateTypes">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getRateTypes" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getRateStructure">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getRateStructure" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBenefitSummaryStructure">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getBenefitSummaryStructure" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findOffices">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findOffices" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getOffice">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getOffice" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCustomFieldStructure">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getCustomFieldStructure" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getProductHistory">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getProductHistory" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="lookupPolicyOriginationReasonQualifiers">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/lookupPolicyOriginationReasonQualifiers" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkAccountModuleAccess">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/checkAccountModuleAccess" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkContactModuleAccess">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/checkContactModuleAccess" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkActivityLogModuleAccess">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/checkActivityLogModuleAccess" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkProductModuleAccess">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/checkProductModuleAccess" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkRevenueTrackingModuleAccess">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/checkRevenueTrackingModuleAccess" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkUserModuleAccess">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/checkUserModuleAccess" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAccountTeamRoles">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getAccountTeamRoles" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findCarrierContacts">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findCarrierContacts" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCarrierContact">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getCarrierContact" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createCarrierContact">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/createCarrierContact" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateCarrierContact">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/updateCarrierContact" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteCarrierContacts">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/deleteCarrierContacts" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getContribution">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getContribution" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getContributionStructure">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getContributionStructure" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findContributions">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findContributions" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findEligibilityRules">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/findEligibilityRules" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getEligibilityRule">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/getEligibiltyRule" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createStatement">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/createStatement" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateStatement">
+			<soap:operation
+				soapAction="http://ws.benefitpoint.com/aptusconnect/broker/v4/updateStatement" />
+			<wsdl:input>
+				<soap:header message="tns:SessionHeader"
+					part="SessionIdHeader" use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="BrokerConnectV4">
+		<wsdl:port name="BrokerConnectV4SOAP" binding="tns:BrokerConnectV4SOAP">
+			<soap:address
+				location="https://www1.benefitpoint.com/aptusConnect/services/BrokerConnectV4SOAP" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
